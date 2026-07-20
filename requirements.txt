@@ -1,0 +1,20 @@
+# Core (required)
+pandas>=2.0
+numpy>=1.24
+scipy>=1.10
+pydantic>=2.0
+scikit-learn>=1.3
+joblib>=1.2
+
+# Preferred gradient booster. If absent, the harness falls back to scikit-learn's
+# HistGradientBoosting (also NaN- and categorical-aware).
+lightgbm>=4.0
+
+# LLM layer — OpenRouter uses an OpenAI-compatible API, so we use the openai SDK.
+# Only needed when running with the LLM (omit for --no-llm runs).
+openai>=1.30
+
+# Optional format / config support (install as needed):
+# pyarrow      # .parquet / .feather
+# openpyxl     # .xlsx
+# pyyaml       # FeatureAgentConfig.from_yaml

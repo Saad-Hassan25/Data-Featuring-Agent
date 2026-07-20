@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "feature-agent"
+version = "0.1.0"
+description = "Agentic Feature Engineering & Selection agent (OpenRouter-backed)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Five Rivers Technologies" }]
+keywords = ["feature-engineering", "feature-selection", "data-science", "agent",
+            "llm", "openrouter", "lightgbm", "leakage"]
+
+# Core dependencies. The LLM layer uses the openai SDK pointed at OpenRouter; the
+# whole pipeline still runs with --no-llm (deterministic generator + report).
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pydantic>=2.0",
+    "scikit-learn>=1.3",
+    "joblib>=1.2",
+    "openai>=1.30",
+]
+
+[project.optional-dependencies]
+lightgbm = ["lightgbm>=4.0"]   # preferred booster (falls back to sklearn HistGradientBoosting)
+parquet = ["pyarrow>=12"]
+excel = ["openpyxl>=3.1"]
+yaml = ["pyyaml>=6"]            # FeatureAgentConfig.from_yaml
+dev = ["pytest>=7"]
+
+[project.scripts]
+feature-agent = "feature_agent.cli:main"
+
+[tool.setuptools]
+packages = ["feature_agent", "feature_agent.prompts"]
+
+[tool.setuptools.package-data]
+"feature_agent.prompts" = ["*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    # cosmetic: LightGBM assigns default feature names when categorical_feature is a
+    # list of indices, so a numpy-fit / numpy-predict pair still warns. Numbers unaffected.
+    "ignore:X does not have valid feature names",
+]
