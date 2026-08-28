@@ -1,3 +1,17 @@
+<!-- Project cover -->
+<p align="center">
+  <img src="./project-cover.svg" alt="Feature Engineering & Selection Agent cover" width="100%" />
+</p>
+
+> **Python / OpenRouter** — An agentic pipeline for proposing, evaluating, selecting, and documenting engineered features.
+
+## Project snapshot
+
+- Uses safe feature materialization and leakage-aware cross-validation to measure real lift.
+- Includes a root-level <a href="./project-cover.svg">project-cover.svg</a>, a scalable project cover graphic for this repository.
+
+---
+
 # Feature Engineering & Selection Agent
 
 An **agentic** feature-engineering pipeline that does what a principal data
